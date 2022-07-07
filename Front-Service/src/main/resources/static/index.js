@@ -78,4 +78,12 @@ angular.module('front').controller('indexController', function ($rootScope, $sco
             return false;
         }
     };
+
+    $rootScope.isUser = function () {
+        if ($localStorage.springWebUser.username) {
+            return $localStorage.springWebUser.username;
+        } else {
+            return null;
+        }
+    };
 });

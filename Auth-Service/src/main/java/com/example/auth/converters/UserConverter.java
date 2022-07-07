@@ -28,8 +28,6 @@ public class UserConverter {
         List<Role> roleList = new ArrayList<>();
         u.setId(0L);
         u.setUsername(userDto.getName());
-        u.setFio(userDto.getFio());
-        u.setPhone(userDto.getPhone());
         u.setEmail(userDto.getMail());
         u.setPassword(passwordEncoder.encode(userDto.getPass()));
         u.setRoles(roleList);
@@ -40,10 +38,8 @@ public class UserConverter {
         UserDto uDto = new UserDto();
         uDto.setId(user.getId())
                 .setName(user.getUsername())
-                .setFio(user.getFio())
                 .setRoles(getRole(user))
                 .setMail(user.getEmail())
-                .setPhone(user.getPhone())
                 .setPass("");
         return uDto;
     }

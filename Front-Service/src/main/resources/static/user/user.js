@@ -17,16 +17,16 @@ angular.module('front').controller('userController', function ($scope, $http, $l
         });
     };
 
-    $scope.createUser = function (){
-       // console.log($scope.newUser.name);
-    $http.post(contextPath + 'api/v1/user/new', $scope.newUser
-    ).then(function (response) {
-        $scope.loadUsers();
-    });
-}
+    $scope.createUser = function () {
+        // console.log($scope.newUser.name);
+        $http.post(contextPath + 'api/v1/user/new', $scope.newUser
+        ).then(function (response) {
+            $scope.loadUsers();
+        });
+    }
 
     $scope.deleteUser = function (userId) {
-        $http.delete(contextPath + 'api/v1/' + userId)
+        $http.delete(contextPath + 'api/v1/user/' + userId)
             .then(function (response) {
                 $scope.loadUsers();
             });

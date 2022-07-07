@@ -23,14 +23,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "fio")
-    private String fio;
-
     @Column(name = "email")
     private String email;
-
-    @Column(name = "phone")
-    private String phone;
 
     @ManyToMany
     @JoinTable(name = "users_roles",

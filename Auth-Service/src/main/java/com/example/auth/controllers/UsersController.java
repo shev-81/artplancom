@@ -20,26 +20,22 @@ public class UsersController {
     private final UserConverter userConverter;
 
     @GetMapping
-//    @PreAuthorize("hasRole('ADMIN')")
     public List<UserDto> allUsers() {
         return userService.getAll().stream().map(userConverter::entityToDto).collect(Collectors.toList());
     }
 
     @GetMapping("/{userName}")
-//    @PreAuthorize("hasRole('ADMIN')")
     public UserDto findUserByName(@PathVariable String userName) {
         return userService.findByUsername(userName).map(userConverter::entityToDto).orElseThrow(() -> new ResourceNotFoundException("Пользователь не найден"));
     }
 
     @PostMapping("/new")
-//    @PreAuthorize("hasRole('ADMIN')")
     public void createNewUser(@RequestBody UserDto userDto){
         User newUser = userConverter.dtoToEntity(userDto);
         userService.createNewUser(newUser, userDto.getRoles());
     }
 
     @DeleteMapping("/{id}")
-//    @PreAuthorize("hasRole('ADMIN')")
     public void delProducts(@PathVariable Long id){
         userService.deleteById(id);
     }

@@ -3,10 +3,8 @@ package com.example.auth.dto;
 public class UserDto {
     private Long id;
     private String name;
-    private String fio;
     private String roles;
     private String mail;
-    private String phone;
     private String pass;
 
     public UserDto() {
@@ -54,24 +52,6 @@ public class UserDto {
 
     public UserDto setPass(String pass) {
         this.pass = pass;
-        return this;
-    }
-
-    public String getFio() {
-        return fio;
-    }
-
-    public UserDto setFio(String fio) {
-        this.fio = fio;
-        return this;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public UserDto setPhone(String phone) {
-        this.phone = phone;
         return this;
     }
 }
