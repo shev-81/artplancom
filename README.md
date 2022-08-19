@@ -1,7 +1,7 @@
 # Тестовое задание artplancom
 
 
-И так, что сделано: реализовано, как вы и просили несколько сервисов: GateWay, Auth-Service, Core-Service и FrontService.
+Несколько сервисов: GateWay, Auth-Service, Core-Service и FrontService.
 Кратко о них.
 #### MS GateWay 
 - принимает все входящие запросы и перенаправляет по MS, а так же проверяет валиден ли токен JWT.
