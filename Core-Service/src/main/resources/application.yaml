@@ -18,3 +18,10 @@ jwt:
 integrations:
   auth-service:
     url: http://localhost:5555/auth
+miniO:
+  server:
+    address: http://127.0.0.1:9000
+  user:
+    login: shev210881
+    password: shev210881
+  container: bucket
