@@ -22,6 +22,6 @@ miniO:
   server:
     address: http://127.0.0.1:9000
   user:
-    login: shev210881
-    password: shev210881
+    login: minioroot
+    password: minioroot
   container: bucket
