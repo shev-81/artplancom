@@ -21,8 +21,12 @@
                         <button class="btn btn-primary" ng-click="details(a.id)">Детали</button>
                     </td>
                     <td>
+                        <button class="btn btn-primary" ng-click="imageUrl(a.imageUrl, 300, 250)">smallImg</button>
+                    </td>
+                    <td>
                         <button class="btn btn-danger" ng-click="deleteAnimal(a.id)">Удалить</button>
                     </td>
+
                 </tr>
                 </tbody>
             </table>
@@ -42,6 +46,11 @@
         </tr>
         <tr>
             <td>
+                <a ng-href="{{smalImage}}">Маленькая Картинка</a>
+                <img data-ng-src="{{smalImage}}" alt="{{smalImage}}"/>
+
+                <p>
+
                 <a ng-href="{{AnimalDetail.imageUrl}}">Картинка</a>
                 <img data-ng-src="{{AnimalDetail.imageUrl}}" height="900" width="900" alt="{{AnimalDetail.imageUrl}}"/>
             </td>

@@ -28,8 +28,7 @@ public class AnimalsController {
 
     @GetMapping("/foruser/{user}")
     public List<AnimalDto> getAllAnimals(@PathVariable String user) {
-        List<Animal> animalList = animalsService.findByUserName(user);
-        return animalList.stream().map(animalConverter::entityToDto).collect(Collectors.toList());
+        return animalsService.findByUserName(user);
     }
 
     @PostMapping()

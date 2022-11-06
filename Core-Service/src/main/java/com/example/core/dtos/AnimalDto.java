@@ -9,13 +9,14 @@ public class AnimalDto {
     private String nickName;
     private String imageUrl;
 
-    public AnimalDto(Long id, String username, String viewAnimal, String dateBorn, String gender, String nickName) {
+    public AnimalDto(Long id, String username, String viewAnimal, String dateBorn, String gender, String nickName, String imageUrl) {
         this.id = id;
         this.username = username;
         this.viewAnimal = viewAnimal;
         this.dateBorn = dateBorn;
         this.gender = gender;
         this.nickName = nickName;
+        this.imageUrl = imageUrl;
     }
 
     public AnimalDto() {

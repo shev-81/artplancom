@@ -5,12 +5,13 @@ import com.example.core.dtos.AnimalDto;
 import com.example.core.entities.Animal;
 import com.example.core.exceptions.ResourceNotFoundException;
 import com.example.core.repositories.AnimalsRepository;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class AnimalsService {
 
@@ -21,21 +22,15 @@ public class AnimalsService {
     private final AnimalConverter animalConverter;
     private final AnimalsRepository animalsRepository;
 
-    public AnimalsService(@Qualifier("DataFileServiceMiniO") DataFileService<Animal> imgService, AnimalConverter animalConverter, AnimalsRepository animalsRepository) {
-        this.imgService = imgService;
-        this.animalConverter = animalConverter;
-        this.animalsRepository = animalsRepository;
-    }
-
-    public List<Animal> findByUserName (String name) {
-        return animalsRepository.findByUserName(name);
+    public List<AnimalDto> findByUserName (String name) {
+        List<Animal> list = animalsRepository.findByUserName(name);
+        List<AnimalDto> dtoList = list.stream().map(animalConverter::entityToDto).toList();
+        return dtoList;
     }
 
     public AnimalDto findById(Long id) {
         Animal animal = animalsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Image not found."));
         AnimalDto animalDto = animalConverter.entityToDto(animal);
-        String URL = imgService.getUrlObject(animal);
-        animalDto.setImageUrl(URL);
         return animalDto;
     }
 

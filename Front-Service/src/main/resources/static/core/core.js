@@ -1,5 +1,11 @@
 angular.module('front').controller('coreController', function ($scope, $http, $location, $localStorage) {
     const contextPath = 'http://localhost:5555/core/';
+    const PROXY_URL = 'http://localhost:8080';
+
+    $scope.imageUrl = function (urlImage, width , height) {
+        $scope.smalImage = PROXY_URL+"/rs:fill:"+width+":"+height+"/plain/"+urlImage;
+        console.log($scope.smalImage);
+    }
 
     $scope.loadAnimals = function (){
         // console.log("загружаем");
