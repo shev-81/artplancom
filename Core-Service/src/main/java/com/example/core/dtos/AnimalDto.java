@@ -7,6 +7,7 @@ public class AnimalDto {
     private String dateBorn;
     private String gender;
     private String nickName;
+    private String imageUrl;
 
     public AnimalDto(Long id, String username, String viewAnimal, String dateBorn, String gender, String nickName) {
         this.id = id;
@@ -66,5 +67,13 @@ public class AnimalDto {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

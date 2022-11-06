@@ -1,13 +1,15 @@
 package com.example.core.services;
 
+import com.example.core.converters.AnimalConverter;
+import com.example.core.dtos.AnimalDto;
 import com.example.core.entities.Animal;
+import com.example.core.exceptions.ResourceNotFoundException;
 import com.example.core.repositories.AnimalsRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AnimalsService {
@@ -15,12 +17,13 @@ public class AnimalsService {
     @Value("${miniO.container}")
     String bucket;
 
-    private final DataFileService <Animal> fileService;
-
+    private final DataFileService <Animal> imgService;
+    private final AnimalConverter animalConverter;
     private final AnimalsRepository animalsRepository;
 
-    public AnimalsService(@Qualifier("DataFileServiceMiniO") DataFileService<Animal> fileService, AnimalsRepository animalsRepository) {
-        this.fileService = fileService;
+    public AnimalsService(@Qualifier("DataFileServiceMiniO") DataFileService<Animal> imgService, AnimalConverter animalConverter, AnimalsRepository animalsRepository) {
+        this.imgService = imgService;
+        this.animalConverter = animalConverter;
         this.animalsRepository = animalsRepository;
     }
 
@@ -28,8 +31,12 @@ public class AnimalsService {
         return animalsRepository.findByUserName(name);
     }
 
-    public Optional<Animal> findById(Long id) {
-        return animalsRepository.findById(id);
+    public AnimalDto findById(Long id) {
+        Animal animal = animalsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Image not found."));
+        AnimalDto animalDto = animalConverter.entityToDto(animal);
+        String URL = imgService.getUrlObject(animal);
+        animalDto.setImageUrl(URL);
+        return animalDto;
     }
 
     public void delAnimalById(Long id) {
@@ -37,7 +44,7 @@ public class AnimalsService {
     }
 
     public Animal createNewAnimal(Animal animal){
-        fileService.putObject(animal);
+        imgService.putObject(animal);
         return animalsRepository.save(animal);
     }
 

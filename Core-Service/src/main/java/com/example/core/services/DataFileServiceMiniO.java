@@ -2,10 +2,12 @@ package com.example.core.services;
 
 import com.example.core.entities.Animal;
 import io.minio.BucketExistsArgs;
+import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.UploadObjectArgs;
 import io.minio.errors.MinioException;
+import io.minio.http.Method;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +17,7 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
 @Service(value = "DataFileServiceMiniO")
@@ -65,7 +68,21 @@ public class DataFileServiceMiniO implements DataFileService <Animal>{
     }
 
     @Override
-    public Object getObject(String value) {
-        return null;
+    public String getUrlObject(Animal animal) {
+        // Get presigned URL string to upload 'my-objectname' in 'my-bucketname' // with an expiration of 1 day.
+        String url = null;
+        try {
+            url = minioClient.getPresignedObjectUrl(
+                    GetPresignedObjectUrlArgs.builder()
+                            .method(Method.GET)
+                            .bucket(bucket)
+                            .object(animal.getNickName())
+                            .expiry(1, TimeUnit.DAYS)
+                            .build());
+        } catch (MinioException | InvalidKeyException | IOException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        System.out.println(url);
+        return url;
     }
 }

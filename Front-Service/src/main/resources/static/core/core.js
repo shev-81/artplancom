@@ -9,9 +9,13 @@ angular.module('front').controller('coreController', function ($scope, $http, $l
             });
     }
 
-    $scope.details = function (dateBorn, gender){
+    $scope.details = function (id){
         // console.log(dateBorn, gender);
-        alert('Пол: ' + gender + ' Дата рождения : ' + dateBorn);
+        // alert('Пол: ' + gender + ' Дата рождения : ' + dateBorn + 'URL : ' + URL);
+        $http.get(contextPath + 'api/v1/animals/' + id)
+            .then(function (response) {
+                $scope.AnimalDetail = response.data;
+            });
     }
 
     $scope.saveAnimal = function () {

@@ -23,8 +23,7 @@ public class AnimalsController {
 
     @GetMapping("/{id}")
     public AnimalDto getAnimalById(@PathVariable Long id) {
-        Animal animal = animalsService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Animal not found, id: " + id));
-        return animalConverter.entityToDto(animal);
+        return animalsService.findById(id);
     }
 
     @GetMapping("/foruser/{user}")
