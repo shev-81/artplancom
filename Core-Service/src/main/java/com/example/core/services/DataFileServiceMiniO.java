@@ -5,6 +5,7 @@ import io.minio.BucketExistsArgs;
 import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
+import io.minio.PutObjectArgs;
 import io.minio.UploadObjectArgs;
 import io.minio.errors.MinioException;
 import io.minio.http.Method;
@@ -53,6 +54,13 @@ public class DataFileServiceMiniO implements DataFileService <Animal>{
     @Override
     public boolean putObject(Animal animal) {
         try {
+            // Upload unknown sized input stream.
+//            minioClient.putObject(PutObjectArgs.builder()
+//                    .bucket("my-bucket name")
+//                    .object("myobject name")
+//                    .stream(inputStream, -1, 10485760)
+//                    .contentType("video/mp4")
+//                    .build());
             minioClient.uploadObject(
                     UploadObjectArgs.builder()
                             .bucket(bucket)
