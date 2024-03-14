@@ -1,5 +1,11 @@
 angular.module('front').controller('coreController', function ($scope, $http, $location, $localStorage) {
     const contextPath = 'http://localhost:5555/core/';
+    const PROXY_URL = 'http://localhost:8080';
+
+    $scope.imageUrl = function (urlImage, width , height) {
+        $scope.smalImage = PROXY_URL+"/rs:fill:"+width+":"+height+"/plain/"+urlImage;
+        console.log($scope.smalImage);
+    }
 
     $scope.loadAnimals = function (){
         // console.log("загружаем");
@@ -9,9 +15,13 @@ angular.module('front').controller('coreController', function ($scope, $http, $l
             });
     }
 
-    $scope.details = function (dateBorn, gender){
+    $scope.details = function (id){
         // console.log(dateBorn, gender);
-        alert('Пол: ' + gender + ' Дата рождения : ' + dateBorn);
+        // alert('Пол: ' + gender + ' Дата рождения : ' + dateBorn + 'URL : ' + URL);
+        $http.get(contextPath + 'api/v1/animals/' + id)
+            .then(function (response) {
+                $scope.AnimalDetail = response.data;
+            });
     }
 
     $scope.saveAnimal = function () {

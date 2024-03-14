@@ -23,14 +23,12 @@ public class AnimalsController {
 
     @GetMapping("/{id}")
     public AnimalDto getAnimalById(@PathVariable Long id) {
-        Animal animal = animalsService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Animal not found, id: " + id));
-        return animalConverter.entityToDto(animal);
+        return animalsService.findById(id);
     }
 
     @GetMapping("/foruser/{user}")
     public List<AnimalDto> getAllAnimals(@PathVariable String user) {
-        List<Animal> animalList = animalsService.findByUserName(user);
-        return animalList.stream().map(animalConverter::entityToDto).collect(Collectors.toList());
+        return animalsService.findByUserName(user);
     }
 
     @PostMapping()

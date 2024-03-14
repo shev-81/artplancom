@@ -18,17 +18,45 @@
                     <td>{{a.viewAnimal}}</td>
                     <td><b>{{a.nickName}}</b></td>
                     <td>
-                        <button class="btn btn-primary" ng-click="details(a.dateBorn, a.gender)">Детали</button>
+                        <button class="btn btn-primary" ng-click="details(a.id)">Детали</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" ng-click="imageUrl(a.imageUrl, 300, 250)">smallImg</button>
                     </td>
                     <td>
                         <button class="btn btn-danger" ng-click="deleteAnimal(a.id)">Удалить</button>
                     </td>
+
                 </tr>
                 </tbody>
             </table>
             <p></p>
         </div>
     </div>
+    <h3>Изображение</h3>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <td>
+                ID : {{AnimalDetail.id}}<br>
+                Вид : {{AnimalDetail.viewAnimal}}<br>
+                Кличка : {{AnimalDetail.nickName}}<br>
+                URL : {{AnimalDetail.imageUrl}}<br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a ng-href="{{smalImage}}">Маленькая Картинка</a>
+                <img data-ng-src="{{smalImage}}" alt="{{smalImage}}"/>
+
+                <p>
+
+                <a ng-href="{{AnimalDetail.imageUrl}}">Картинка</a>
+                <img data-ng-src="{{AnimalDetail.imageUrl}}" height="900" width="900" alt="{{AnimalDetail.imageUrl}}"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
     <form novalidate ng-submit="saveAnimal()">
         <input class="form-control" type="text" placeholder="Кот" ng-model="animalForm.viewAnimal">
         <label>Вид животного</label>
